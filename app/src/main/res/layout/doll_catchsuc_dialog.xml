@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent" >
+    <FrameLayout
+        android:layout_width="251.33dp"
+        android:layout_height="357dp"
+        android:layout_centerInParent="true"
+        android:background="@android:color/black">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:src="@drawable/bg_catch_success_doll"/>
+        <ImageView
+            android:layout_width="198dp"
+            android:layout_height="53.67dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/icon_catch_success_doll"/>
+
+        <ImageView
+            android:layout_width="123.07dp"
+            android:layout_height="123.07dp"
+            android:layout_marginTop="48.67dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/icon_catch_doll"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="209dp"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:text="恭喜你抓到娃娃"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="bottom">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.33dp"
+                android:layout_gravity="center_horizontal"
+                android:background="#DBE3E9"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="51.07dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_timer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:text="离开（12秒）"/>
+                <View
+                    android:layout_width="0.87dp"
+                    android:layout_height="match_parent"
+                    android:background="#DBE3E9"/>
+                <TextView
+                    android:id="@+id/tv_catch_again"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#0CB3FF"
+                    android:textSize="16sp"
+                    android:text="再抓一次"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+        
+    <ImageView
+        android:id="@+id/cancel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="450.33dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/icon_return"
+        android:visibility="gone"/>
+
+</RelativeLayout>

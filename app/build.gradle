@@ -1,0 +1,157 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "com.gachat.main"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        externalNativeBuild {
+            cmake {
+                cppFlags "-frtti -fexceptions"
+                arguments '-DANDROID_STL=c++_shared'
+            }
+            ndk {
+//                abiFilters 'arm64-v8a'
+                abiFilters 'armeabi-v7a'
+            }
+
+        }
+//        resValue "string", "updatefun_provider_file_authorities", "<com.gachat.main>.fileprovider"
+        multiDexEnabled true
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro,proguard-fresco.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    sourceSets {
+        main {
+            jni.srcDirs = []
+//            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+    }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+    afterEvaluate {
+        println 'afterEvaluate'
+        tasks.matching {
+            it.name.startsWith('dex')
+        }.each { dx->
+            def listFile=project.rootDir.absolutePath+'app/maindexlist.txt'
+            println "root dir:" + project.rootDir.absolutePath
+            println "dex task found:" + dx.name
+            if (dx.additionalParameters==null){
+                dx.additionalParameters=[]
+            }
+            dx.additionalParameters +='--multi-dex'  //表示当方法数越界时 则生成多个dex文件
+            dx.additionalParameters +='--main-dex-list='+listFile  //指定了要在主dex中打包的类的列表
+            dx.additionalParameters +='--minimal-main-dex'  //表明只有--main-dex-list所指定的类才能打包到主dex中
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:support-v4:27.1.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation "com.android.support:support-v4:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support:design:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support:cardview-v7:${rootProject.ext.supportLibVersion}"
+
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.orhanobut:logger:1.15'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'com.youth.banner:banner:1.4.10'
+    implementation 'com.github.lzyzsd:jsbridge:1.0.4'
+
+//        implementation ('com.alibaba.android:vlayout:1.2.8@aar') { transitive = true }
+
+    //    https://www.jianshu.com/p/b343fcff51b0
+    //    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'0
+
+    /** fir.im 自动更新  */
+    //https://github.com/hugeterry/UpdateFun
+    //    implementation 'cn.hugeterry.updatefun:updatefun:2.0.6'
+    /**
+     *  图片框架
+     */
+    implementation 'com.facebook.fresco:fresco:1.8.1'
+
+    // 支持 GIF 动图，需要添加
+    implementation 'com.facebook.fresco:animated-gif:0.12.0'
+
+    // 在 API < 14 上的机器支持 WebP 时，需要添加
+
+    //    implementation 'com.facebook.fresco:animated-base-support:0.12.0'
+
+    // 支持 WebP （静态图+动图），需要添加
+
+    //    implementation 'com.facebook.fresco:animated-webp:0.12.0'
+
+    //    implementation 'com.facebook.fresco:webpsupport:0.12.0'
+
+    //    implementation 'com.facebook.fresco:imagepipeline:1.8.1'
+
+    /**
+     *  加载动画
+     */
+
+    // https://github.com/zzz40500/android-shapeLoadingView
+
+    //    implementation 'com.github.zzz40500:android-shapeLoadingView:1.0.3.2'
+
+    // https://github.com/tajchert/WaitingDots
+
+    //    implementation 'com.github.tajchert:WaitingDots:0.4.0'
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.13'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
+
+    //内存检测
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+
+    implementation project(':FlycoDialog_Lib')
+    implementation project(':generator')
+    implementation project(':network')
+    api(name: 'janusgateway-debug', ext: 'aar')
+}

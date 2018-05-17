@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent" >
+    <FrameLayout
+        android:layout_width="251.33dp"
+        android:layout_height="357dp"
+        android:layout_centerInParent="true">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:src="@drawable/bg_timer_doll"/>
+        <ImageView
+            android:layout_width="198dp"
+            android:layout_height="53.67dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/icon_timer_doll"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="30sp"
+            android:text="倒计时"/>
+
+        <RelativeLayout
+            android:layout_width="104dp"
+            android:layout_height="129dp"
+            android:layout_marginTop="91dp"
+            android:src="@drawable/icon_timers"
+            android:layout_gravity="center_horizontal">
+            <TextView
+                android:id="@+id/tv_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:layout_centerInParent="true"
+                android:textSize="41.33sp"
+                android:textStyle="bold"
+                android:text="8"/>
+        </RelativeLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="166.33dp"
+            android:layout_height="46.67dp"
+            android:layout_marginTop="253dp"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/shape_rectangle_blue">
+            <RelativeLayout
+                android:id="@+id/rl_startgame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorBlueLight">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:layout_centerInParent="true"
+                    android:textSize="16sp"
+                    android:text="开始游戏"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+        
+        <ImageView
+            android:id="@+id/cancel"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="450.33dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/icon_close"/>
+
+</RelativeLayout>

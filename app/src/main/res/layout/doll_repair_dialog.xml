@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+     <LinearLayout
+        android:layout_width="251.33dp"
+        android:layout_height="398.33dp"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+             <FrameLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="220.33dp"
+                 android:background="@drawable/bg_repair_dialog">
+                     <ImageView
+                             android:layout_width="100.67dp"
+                             android:layout_height="100.67dp"
+                             android:layout_marginTop="41.67dp"
+                             android:layout_gravity="center_horizontal"
+                             android:src="@drawable/icon_repair"/>
+                     <TextView
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_gravity="center_horizontal"
+                             android:layout_marginTop="162.67dp"
+                             android:textSize="16sp"
+                             android:textColor="@android:color/white"
+                             android:text="当遇到不文明时记得举报哦！"/>
+             </FrameLayout>
+             <android.support.v7.widget.LinearLayoutCompat
+                     android:id="@+id/ll_container"
+                     android:layout_width="match_parent"
+                     android:layout_height="178dp"
+                     android:gravity="center"
+                     app:dividerPadding="1dp"
+                     android:layout_gravity="bottom"
+                     android:orientation="vertical"
+                     app:showDividers="middle"
+                     android:background="@android:color/white"
+                     app:divider="@drawable/shape_line_gray"
+                     android:weightSum="4">
+                     <TextView
+                         android:id="@+id/reason0"
+                             android:layout_width="match_parent"
+                             android:layout_height="0dp"
+                             android:layout_weight="1"
+                             android:gravity="center"
+                             android:layout_gravity="center"
+                             android:textSize="16sp"
+                             android:textColor="#000000"
+                             android:text="出现黑屏"/>
+                     <TextView
+                         android:id="@+id/reason1"
+                             android:layout_width="match_parent"
+                             android:layout_height="0dp"
+                             android:layout_weight="1"
+                             android:gravity="center"
+                             android:layout_gravity="center"
+                             android:textSize="16sp"
+                             android:textColor="#000000"
+                             android:text="突然闪退"/>
+                     <TextView
+                         android:id="@+id/reason2"
+                             android:layout_width="match_parent"
+                             android:layout_height="0dp"
+                             android:layout_weight="1"
+                             android:gravity="center"
+                             android:layout_gravity="center"
+                             android:textSize="16sp"
+                             android:textColor="#000000"
+                             android:text="使用过程中卡顿"/>
+                     <TextView
+                         android:id="@+id/reason3"
+                             android:layout_width="match_parent"
+                             android:layout_height="0dp"
+                             android:layout_weight="1"
+                             android:gravity="center"
+                             android:layout_gravity="center"
+                             android:textSize="16sp"
+                             android:textColor="#000000"
+                             android:text="取消"/>
+             </android.support.v7.widget.LinearLayoutCompat>
+
+     </LinearLayout>
+
+</RelativeLayout>
+
+<!--<ImageView-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--android:background="@drawable/bg_repair_dialog"/>-->
+<!--<ImageView-->
+<!--android:layout_width="100.67dp"-->
+<!--android:layout_height="100.67dp"-->
+<!--android:layout_marginTop="41.67dp"-->
+<!--android:layout_gravity="center_horizontal"-->
+<!--android:src="@drawable/icon_repair"/>-->
+<!--<TextView-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_gravity="center_horizontal"-->
+<!--android:layout_marginTop="162.67dp"-->
+<!--android:textSize="16sp"-->
+<!--android:textColor="@android:color/white"-->
+<!--android:text="当遇到不文明时记得举报哦！"/>-->
+<!--<LinearLayout-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="178dp"-->
+<!--android:layout_gravity="bottom"-->
+<!--android:orientation="vertical"-->
+<!--android:weightSum="4">-->
+<!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:textSize="16sp"-->
+    <!--android:textColor="#000000"-->
+    <!--android:text="使用大量不雅词汇"/>-->
+<!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0.33dp"-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--android:background="#DBE3E9"/>-->
+<!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:textSize="16sp"-->
+    <!--android:textColor="#000000"-->
+    <!--android:text="出现不良的举动"/>-->
+<!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0.33dp"-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--android:background="#DBE3E9"/>-->
+<!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:textSize="16sp"-->
+    <!--android:textColor="#000000"-->
+    <!--android:text="侮辱挑逗的行为"/>-->
+<!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0.33dp"-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--android:background="#DBE3E9"/>-->
+<!--<TextView-->
+    <!--android:id="@+id/cancel"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:textSize="16sp"-->
+    <!--android:textColor="#000000"-->
+    <!--android:text="算了，随缘吧"/>-->
+<!--</LinearLayout>-->

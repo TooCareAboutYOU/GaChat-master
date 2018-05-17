@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="102.67dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="1dp"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:background="@android:color/white">
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/EditTextViewTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="哈哈哈"/>
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdv_pic"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            app:placeholderImage="@drawable/gamehome_chanpin_bg"/>
+        <TextView
+            android:id="@+id/tv_date"
+            style="@style/EditTextViewTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10.67sp"
+            android:gravity="center"
+            android:text="哈哈哈"
+            />
+    </LinearLayout>
+
+    
+</RelativeLayout>

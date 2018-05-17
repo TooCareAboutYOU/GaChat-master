@@ -1,0 +1,70 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--<item name="android:fitsSystemWindows">true</item>-->
+
+    </style>
+
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowBackground">@drawable/img_splash</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+
+
+
+    <style name="ActivityTheme" parent="AppTheme">
+        <!--<item name="android:windowBackground">@color/colorBackground</item>-->
+    </style>
+
+    <style name="FullActivityTheme" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:keepScreenOn">true</item>
+        <!--<item name="android:windowNoTitle">true</item>-->
+    </style>
+
+    <style name="EditTextViewTheme">
+        <item name="android:singleLine">true</item>
+        <item name="android:lines">1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColorHint">#8F9BA3</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="DialogBottomStyleTheme" parent="android:Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/pop_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/pop_exit_anim</item>
+    </style>
+
+
+    <style name="ActionSheetDialogStyle" parent="@android:style/Theme.Dialog">
+
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 浮于Activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- Dialog以外的区域模糊效果 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- Dialog进入及退出动画 -->
+        <item name="android:windowAnimationStyle">@style/DialogBottomStyleTheme</item>
+    </style>
+
+
+</resources>

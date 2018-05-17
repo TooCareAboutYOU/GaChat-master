@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/img_dollImg"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/user_icon_zuanshi"/>
+
+    <TextView
+        android:id="@+id/tv_dollName"
+        android:layout_toEndOf="@+id/img_dollImg"
+        style="@style/EditTextViewTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="null"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"/>
+
+
+    <TextView
+        android:id="@+id/tv_dollTime"
+        android:layout_toEndOf="@+id/img_dollImg"
+        android:layout_below="@+id/tv_dollName"
+        style="@style/EditTextViewTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="time"
+        android:textSize="12sp"
+        android:textColor="@android:color/darker_gray"/>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:id="@+id/tv_sendOutGoods"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:background="@drawable/shape_rectangle_blue"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:text="线下发货"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_sended"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/colorGrayDark"
+            android:text="已发货"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_fromPerson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/colorGrayDark"
+            android:text="xx赠送"/>
+    </FrameLayout>
+
+</RelativeLayout>

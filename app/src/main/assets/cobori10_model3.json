@@ -1,0 +1,9 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "cobori10.moc3",
+		"Textures": [
+			"cobori10.png"
+		]
+	} 
+}

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_connect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="连接"/>
+
+        <Button
+            android:id="@+id/btn_join"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="加入"/>
+
+        <Button
+            android:id="@+id/btn_joinQueue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="排队"/>
+
+        <Button
+            android:id="@+id/btn_StartGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="开始游戏"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="左移"/>
+
+        <Button
+            android:id="@+id/btn_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上移"/>
+
+        <Button
+            android:id="@+id/btn_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="右移"/>
+
+        <Button
+            android:id="@+id/btn_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下移"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_catch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="抓"/>
+
+</LinearLayout>

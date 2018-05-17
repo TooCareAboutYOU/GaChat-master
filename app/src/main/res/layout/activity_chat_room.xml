@@ -1,0 +1,112 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/matching_bg">
+
+    <FrameLayout
+        android:id="@+id/fl_FullScreenView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <FrameLayout
+        android:id="@+id/fl_SmallScreenView"
+        android:layout_width="100dp"
+        android:layout_height="170dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="end"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/icon_return"/>
+
+    <LinearLayout
+        android:id="@+id/ll_UserRoomInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="60dp"
+        android:background="@color/colorGrayDark"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_Username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_CatchTimes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_GetDollTimes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/img_IsShow"
+        android:layout_width="33.33dp"
+        android:layout_height="33.33dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="bottom"
+        android:src="@drawable/icon_close_fullscreen"/>
+
+    <ImageView
+        android:id="@+id/img_report"
+        android:layout_width="33.33dp"
+        android:layout_height="33.33dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="bottom"
+        android:src="@drawable/icon_report"/>
+
+    <ImageView
+        android:id="@+id/img_StartChat"
+        android:layout_width="83.33dp"
+        android:layout_height="83.33dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center|bottom"
+        android:src="@drawable/kachat_home_btn_default"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_timer"
+        android:layout_width="39.67dp"
+        android:layout_height="39.67dp"
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/icon_timers">
+        <TextView
+            android:id="@+id/tv_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/black"
+            android:paddingTop="5dp"
+            android:textSize="10sp"
+            android:text="30s"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

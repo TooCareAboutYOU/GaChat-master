@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/FlycoAnimation_Lib/FlycoAnimation_Lib.iml" filepath="$PROJECT_DIR$/FlycoAnimation_Lib/FlycoAnimation_Lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FlycoDialog_Lib/FlycoDialog_Lib.iml" filepath="$PROJECT_DIR$/FlycoDialog_Lib/FlycoDialog_Lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GaChat-master.iml" filepath="$PROJECT_DIR$/GaChat-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/generator/generator.iml" filepath="$PROJECT_DIR$/generator/generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/network/network.iml" filepath="$PROJECT_DIR$/network/network.iml" />
+    </modules>
+  </component>
+</project>

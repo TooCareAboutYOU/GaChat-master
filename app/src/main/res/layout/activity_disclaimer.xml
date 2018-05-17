@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.gachat.main.ui.user.DisclaimerActivity">
+
+    <include layout="@layout/toolbar_base"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:text="@string/txt_disclaimer_title"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="11.33dp"
+        android:layout_marginEnd="11.33dp"
+        android:textSize="16sp"
+        android:text="@string/txt_disclaimer_info"/>
+
+
+</LinearLayout>

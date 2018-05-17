@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent" >
+     <FrameLayout
+        android:layout_width="251.33dp"
+        android:layout_height="327.67dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_meet_again_dialog">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34.4dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="31sp"
+            android:textColor="@android:color/white"
+            android:text="再次遇见"/>
+         <TextView
+             android:layout_width="167dp"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="85dp"
+             android:layout_gravity="center_horizontal"
+             android:textSize="24sp"
+             android:textColor="@android:color/white"
+             android:text="哇！好幸运耶，又和你相遇呢！"/>
+      </FrameLayout>
+        
+        <ImageView
+            android:id="@+id/cancel"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="450.33dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/icon_return"/>
+
+</RelativeLayout>

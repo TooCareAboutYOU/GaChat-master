@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorForgetPwd"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/tv_express_sn"
+            style="@style/EditTextViewTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:textSize="12sp"
+            android:textColor="@color/colorForgetPwd"
+            android:text="订单号："/>
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text=""/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@+id/tv_express_sn">
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/sdv_image"
+                android:layout_alignParentStart="true"
+                android:layout_width="45dp"
+                android:layout_height="45dp"/>
+
+            <TextView
+                android:id="@+id/tv_goods_name"
+                style="@style/EditTextViewTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/sdv_image"
+                android:textColor="@android:color/black"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:textSize="14sp"
+                android:text="物品名"/>
+
+            <TextView
+                android:id="@+id/tv_time"
+                style="@style/EditTextViewTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/sdv_image"
+                android:textColor="@color/colorForgetPwd"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="10dp"
+                android:textSize="12sp"
+                android:text="时间"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorForgetPwd"/>
+</LinearLayout>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.user.SetConllectGoodsActivity">
+
+    <include layout="@layout/toolbar_base"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center_vertical"
+            android:textSize="16sp"
+            android:text="收货人："/>
+        <EditText
+            android:id="@+id/et_name"
+            style="@style/EditTextViewTheme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:textSize="16sp"
+            android:hint="请输入收货人姓名"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center_vertical"
+            android:textSize="16sp"
+            android:text="联系电话："/>
+        <EditText
+            android:id="@+id/et_mobile"
+            style="@style/EditTextViewTheme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:textSize="16sp"
+            android:hint="请输入收货人联系方式"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center_vertical"
+            android:textSize="16sp"
+            android:text="收货地址："/>
+        <EditText
+            android:id="@+id/et_address"
+            style="@style/EditTextViewTheme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:textSize="16sp"
+            android:hint="请输入收货人地址"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_sendGoods"
+        android:layout_width="180dp"
+        android:layout_height="33.33dp"
+        android:layout_marginTop="74.67dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/login_btn_login_default"
+        android:orientation="horizontal"
+        android:weightSum="4">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:text="确认发货"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_GaChat"
+        android:icon="@drawable/tab_icon_kachat_selected"
+        android:title="@string/txt_tab_first_name" />
+    <item
+        android:id="@+id/item_CatchDoll"
+        android:icon="@drawable/tab_icon_game_normal"
+        android:title="@string/txt_tab_second_name" />
+    <item
+        android:id="@+id/item_user"
+        android:icon="@drawable/tab_icon_user_normal"
+        android:title="@string/txt_tab_thrid_name" />
+</menu>

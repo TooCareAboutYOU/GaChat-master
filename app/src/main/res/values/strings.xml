@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name">咔洽</string>
+
+
+    <string name="testMobileNum">13512132843</string>
+    <string name="testPwd">111111</string>
+
+    <!--登录-->
+    <string name="txt_login">登录</string>
+    <string name="txt_inputPhone">请输入您的手机号</string>
+    <string name="txt_inputPassword">请输入您的密码</string>
+    <string name="txt_forgetPassword">忘记密码</string>
+    <string name="txt_register">注册</string>
+
+    <!--注册-->
+    <string name="txt_nextStep">下一步</string>
+    <string name="txt_perfectInformation">完善资料</string>
+    <string name="txt_nickName_title">昵称：</string>
+    <string name="txt_nickName">请输入您的昵称</string>
+    <string name="txt_age_Title">年龄：</string>
+    <string name="txt_age">请选择您的年龄</string>
+    <string name="txt_disposition_title">性格：</string>
+    <string name="txt_disposition_normal">正常</string>
+    <string name="txt_disposition_introverted">内向</string>
+    <string name="txt_disposition_Outgoing">外向</string>
+    <string name="txt_sex_title">性别：</string>
+    <string name="txt_sex_men">男</string>
+    <string name="txt_sex_women">女</string>
+
+    <!--首页-->
+    <string name="txt_tab_first_name">咔洽</string>
+    <string name="txt_tab_second_name">抓娃娃</string>
+    <string name="txt_tab_thrid_name">我的</string>
+
+    <!--咔洽-->
+    <string name="mark">你们之间往往缺的是一键距离</string>
+    <string name="txt_matching">立即匹配</string>
+
+    <!--抓娃娃-->
+
+
+    <!--我的-->
+    <string name="txt_user_MyDolls">我的娃娃</string>
+    <string name="txt_user_Mynews">我的消息</string>
+    <string name="txt_user_ClearCache">清除内存</string>
+    <string name="txt_user_Feedback">反馈意见</string>
+    <string name="txt_user_Disclaimer">免责声明</string>
+    <string name="txt_user_AboutUs">关于我们</string>
+    <string name="txt_user_Exit">退出</string>
+
+    <!--我的娃娃-->
+    <string name="txt_get_dolls">获取娃娃</string>
+    <string name="txt_post_dolls">失去娃娃</string>
+
+
+    <!--协议声明-->
+    <string name="txt_disclaimer">用户协议</string>
+    <string name="txt_disclaimer_title">咔洽用户协议</string>
+    <string name="txt_disclaimer_info">本人/单位(姓名/单位名称)于(时间)委托(委托人或单位)申请购买了(产品名称)，由于(概述问题)，
+        本人/单位 (姓名/单位名称)现申请获得(产品名称)的管理权。为了避免权属纠纷，特做如下说明：
+        (姓名/单位名称)是(产品名称)的真正所有者，今后由(产品名称)引起的纠纷和造成的一切后果，
+        其责任概由(姓名/单位名称)承担，与(委托人或单位)无关。特此声明!</string>
+
+
+    <!--忘记密码-->
+    <string name="txt_ForgetPassWord">忘记密码</string>
+    <string name="txt_PhoneNum_title">手机号：</string>
+    <string name="txt_PhoneNum_hint">请输入手机号</string>
+    <string name="txt_verificationCode_title">验证码：</string>
+    <string name="txt_verificationCode_hint">请输入验证码</string>
+    <string name="txt_requestVerificationCode">发送验证码</string>
+    <string name="txt_retryVCode">重发验证码</string>
+    <string name="txt_newPassWord_title">新密码：</string>
+    <string name="txt_newPassWord_hint">请输入6-16位密码</string>
+    <string name="txt_finished">完成</string>
+
+    <!--反馈意见-->
+    <string name="txt_feedback">反馈意见</string>
+    <string name="txt_feedback_hint">请描述你的问题</string>
+    <string name="txt_contact">联系方式</string>
+    <string name="txt_contact_hint">留下邮箱和手机号，方便联系</string>
+    <string name="txt_wordCount">10~200字</string>
+
+
+    <!---->
+    <string name="a">点击确实不可修改</string>
+    <string name="b">赠送成功，如对方接受，将从背包扣除。</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>
+
+

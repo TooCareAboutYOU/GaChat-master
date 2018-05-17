@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent" >
+     <FrameLayout
+        android:layout_width="251.33dp"
+        android:layout_height="336.33dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_goods_doll">
+        <TextView
+            android:id="@+id/tv_goods_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34.4dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="21sp"
+            android:textColor="@android:color/black"
+            android:text="太熊"/>
+         <com.facebook.drawee.view.SimpleDraweeView
+             android:id="@+id/img_goods_img"
+             android:layout_width="125.67dp"
+             android:layout_height="125.67dp"
+             android:layout_marginTop="83dp"
+             android:background="@drawable/icon_goods"
+             android:layout_gravity="center_horizontal"/>
+
+         <TextView
+             android:id="@+id/tv_desc"
+             android:layout_width="167dp"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="227.73dp"
+             android:layout_gravity="center_horizontal"
+             android:textSize="12sp"
+             android:textColor="@android:color/black" />
+      </FrameLayout>
+        
+        <ImageView
+            android:id="@+id/cancel"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="450.33dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/icon_close"/>
+
+</RelativeLayout>

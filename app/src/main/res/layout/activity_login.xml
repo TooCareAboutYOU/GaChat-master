@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gachat.main.ui.login.activity.LoginActivity">
+
+
+    <ImageView
+        android:layout_width="55dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="72dp"
+        android:src="@drawable/login_logo"
+        android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="178.75dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="4">
+            <ImageView
+                android:layout_width="15.5dp"
+                android:layout_height="15.5dp"
+                android:src="@drawable/login_logo_user"/>
+            <EditText
+                android:id="@+id/et_phoneNum"
+                android:theme="@style/EditTextViewTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="14sp"
+                android:text="@string/testMobileNum"
+                android:hint="@string/txt_inputPhone"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="4">
+            <ImageView
+                android:layout_width="15.5dp"
+                android:layout_height="15.5dp"
+                android:src="@drawable/login_icon_password"/>
+            <EditText
+                android:id="@+id/et_pwd"
+                android:theme="@style/EditTextViewTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="14sp"
+                android:text="@string/testPwd"
+                android:hint="@string/txt_inputPassword"/>
+        </LinearLayout>
+        
+        
+        <LinearLayout
+            android:id="@+id/ll_login"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:background="@drawable/login_btn_login_default"
+            android:orientation="horizontal"
+            android:weightSum="4">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:text="@string/txt_login"/>
+        </LinearLayout>
+       
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:id="@+id/tv_forgetPwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:textSize="12sp"
+                android:text="@string/txt_forgetPassword"/>
+            <TextView
+                android:id="@+id/tv_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/colorBlueLight"
+                android:textSize="12sp"
+                android:text="@string/txt_register"/>
+        </RelativeLayout>
+        
+    </LinearLayout>
+
+</RelativeLayout>

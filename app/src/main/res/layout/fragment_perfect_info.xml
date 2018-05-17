@@ -1,0 +1,165 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.gachat.main.ui.login.activity.ForgetPasswordActivity">
+
+    <include layout="@layout/toolbar_base"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorGrayDark"
+                android:textSize="14sp"
+                android:text="@string/txt_nickName_title"/>
+            <EditText
+                android:id="@+id/et_inputNickName"
+                android:theme="@style/EditTextViewTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:hint="@string/txt_nickName"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorGrayDark"
+                android:textSize="14sp"
+                android:text="@string/txt_age_Title"/>
+            <TextView
+                android:id="@+id/et_inputAge"
+                android:theme="@style/EditTextViewTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textSize="14sp"
+                android:hint="@string/txt_age"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorGrayDark"
+                android:textSize="14sp"
+                android:text="@string/txt_disposition_title"/>
+            <RadioGroup
+                android:id="@+id/rg_disposition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:weightSum="3"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rbtn_Normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    android:text="@string/txt_disposition_normal"/>
+                <RadioButton
+                    android:id="@+id/rbtn_Introverted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    android:text="@string/txt_disposition_introverted"/>
+                <RadioButton
+                    android:id="@+id/rbtn_Outgoing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    android:text="@string/txt_disposition_Outgoing"/>
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorGrayDark"
+                android:textSize="14sp"
+                android:text="@string/txt_sex_title"/>
+            <RadioGroup
+                android:id="@+id/rg_sex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:weightSum="3"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rbtn_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    android:text="@string/txt_sex_men"/>
+                <RadioButton
+                    android:id="@+id/rbtn_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    android:text="@string/txt_sex_women"/>
+            </RadioGroup>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_finished"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/login_btn_login_default"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:text="@string/txt_finished"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
