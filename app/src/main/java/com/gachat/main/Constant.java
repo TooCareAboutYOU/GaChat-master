@@ -31,7 +31,6 @@ public class Constant {
     public static long getCalleeId(){ return SharedPreferencesHelper.getInstance().getLongValueByKey(CalleeUserId); }
 
 
-
     public static final String USER_MOBILE="user_mobile";
     public static final String USER_PASSWORD="user_password";
 

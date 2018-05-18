@@ -3,7 +3,10 @@ package com.gachat.main.ui.chat;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -19,6 +22,7 @@ import java.util.Objects;
  */
 public class WaitPairingFragment extends BaseDialogFragment {
 
+    public static final String TAG = "WaitPairingFragment";
 
     @SuppressLint("StaticFieldLeak")
     private static WaitPairingFragment instance=null;
@@ -30,6 +34,7 @@ public class WaitPairingFragment extends BaseDialogFragment {
         return instance;
     }
 
+    private boolean isExist=false;
 
     private ImageView mBack;
 
@@ -39,6 +44,27 @@ public class WaitPairingFragment extends BaseDialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mActivity=new WeakReference<>((ChatRoomActivity) context);
+    }
+
+    @SuppressLint("CommitTransaction")
+    @Override
+    public void show(FragmentManager manager, String tag) {
+        Log.i(TAG, "show: 1");
+        if (!isExist) {
+            Log.i(TAG, "show: 2");
+            super.show(manager, tag);
+            isExist = !isExist;
+            Log.i(TAG, "show: "+isExist);
+        }
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        Log.i(TAG, "onDismiss: 1 "+isExist);
+        if (isExist) {
+            Log.i(TAG, "onDismiss: 2");
+            super.dismiss();
+        }
     }
 
     @Override
@@ -52,7 +78,6 @@ public class WaitPairingFragment extends BaseDialogFragment {
             VAChatAPI.getInstance().cancelPair();
             dismiss();
         });
-
     }
 
     private DisplayMetrics metrics;
@@ -92,6 +117,7 @@ public class WaitPairingFragment extends BaseDialogFragment {
     public void onDestroyView() {
         mBack=null;
         metrics=null;
+        isExist=false;
         super.onDestroyView();
     }
 }

@@ -3,12 +3,10 @@ package com.gachat.main.ui.chat;
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.gachat.main.Constant;
 import com.gachat.main.R;
-import com.gachat.main.application.MyApplication;
 import com.gachat.main.base.BaseBean;
 import com.gachat.main.base.BaseDialogFragment;
 import com.gachat.main.beans.MessageBean;
@@ -52,7 +50,7 @@ public class ReportDialogFragment extends BaseDialogFragment implements OnPresen
             mPresenter.sendReport(userId, reasonId);
             dismiss();
         }else {
-            Toast.makeText(MyApplication.getInstance(),"不能举报自己！", Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort("不能举报自己！");
         }
     }
 

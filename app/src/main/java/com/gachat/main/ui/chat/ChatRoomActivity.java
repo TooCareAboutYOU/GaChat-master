@@ -78,6 +78,7 @@ public class ChatRoomActivity extends BaseActivity{
     }
 
     public void showWaitPairingFragment(){
+        Log.i(WaitPairingFragment.TAG, "showWaitPairingFragment: ");
         WaitPairingFragment.getInstance().show(getSupportFragmentManager(),"waiting");
     }
 
@@ -123,7 +124,6 @@ public class ChatRoomActivity extends BaseActivity{
         if (UserData() != null) {
             uid=UserData().getUid();
             token=UserData().getToken();
-            Log.i("ReportDialogFragment", "uid："+uid+"\ntoken: "+token);
             mTvUsername.setText(UserData().getUsername());
             String str1="抓娃娃"+UserData().getClaw_doll_time()+"次";
             String str2="收礼物"+UserData().getGift()+"次";

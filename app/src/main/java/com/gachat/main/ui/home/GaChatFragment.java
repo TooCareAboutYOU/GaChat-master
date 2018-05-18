@@ -119,7 +119,6 @@ public class GaChatFragment extends BaseFragment {
             connectSDK();
         }
 
-
         if (isVisible) {
             Log.i("isVisible", "onFragmentVisibleChange: GaChatFragment 显示");
             if (mActivity.UserData() != null) {
