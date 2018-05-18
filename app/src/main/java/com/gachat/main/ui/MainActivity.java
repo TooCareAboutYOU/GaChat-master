@@ -16,12 +16,12 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.gachat.main.R;
-import com.gachat.main.application.ApplicationHelper;
 import com.gachat.main.base.BaseActivity;
 import com.gachat.main.event.ExitEvent;
 import com.gachat.main.ui.home.CatchDollFragment;
 import com.gachat.main.ui.home.GaChatFragment;
 import com.gachat.main.ui.home.UserFragment;
+import com.gachat.main.util.manager.ActivityManager;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -179,8 +179,9 @@ public class MainActivity extends BaseActivity {
                 Toast.makeText(getApplicationContext(),"再按一次退出程序",Toast.LENGTH_SHORT).show();
                 firstTime=System.currentTimeMillis();
             }else{
-                ExitEvent.exitApp();
                 Log.i("onKeyDown", "onKeyDown: MainActivity");
+                ExitEvent.exitApp();
+                ActivityManager.getInstance().exitSystem();
             }
             return true;
         }
@@ -194,6 +195,6 @@ public class MainActivity extends BaseActivity {
             list=null;
         }
         super.onDestroy();
-        ApplicationHelper.getInstance().getRefWatcher().watch(this);
+//        ApplicationHelper.getInstance().getRefWatcher().watch(this);
     }
 }

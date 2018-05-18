@@ -7,9 +7,9 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gachat.generator.config.DaoQuery;
-import com.gachat.generator.model.UserBean;
 import com.gachat.main.R;
+import com.gachat.main.beans.UserBean;
+import com.gachat.main.mvp.models.UpdateUserData;
 import com.gachat.main.util.manager.ActivityManager;
 
 import butterknife.ButterKnife;
@@ -71,12 +71,13 @@ public abstract class BaseActivity extends AppCompatActivity { //implements NetW
     }
 
     public UserBean UserData() {
-        if (DaoQuery.queryUserlistSize() > 0) {
-            if (DaoQuery.queryUserbean() != null) {
-                return DaoQuery.queryUserbean();
-            }
-        }
-        return null;
+//        if (DaoQuery.queryUserlistSize() > 0) {
+//            if (DaoQuery.queryUserbean() != null) {
+//                return DaoQuery.queryUserbean();
+//            }
+//        }
+//        return null;
+        return UpdateUserData.getUserData();
     }
 
 

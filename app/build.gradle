@@ -22,12 +22,12 @@ android {
 
         }
 //        resValue "string", "updatefun_provider_file_authorities", "<com.gachat.main>.fileprovider"
-        multiDexEnabled true
+//        multiDexEnabled true
     }
 
-    dexOptions {
-        javaMaxHeapSize "4g"
-    }
+//    dexOptions {
+//        javaMaxHeapSize "4g"
+//    }
 
     buildTypes {
         release {
@@ -61,22 +61,22 @@ android {
         }
     }
 
-    afterEvaluate {
-        println 'afterEvaluate'
-        tasks.matching {
-            it.name.startsWith('dex')
-        }.each { dx->
-            def listFile=project.rootDir.absolutePath+'app/maindexlist.txt'
-            println "root dir:" + project.rootDir.absolutePath
-            println "dex task found:" + dx.name
-            if (dx.additionalParameters==null){
-                dx.additionalParameters=[]
-            }
-            dx.additionalParameters +='--multi-dex'  //表示当方法数越界时 则生成多个dex文件
-            dx.additionalParameters +='--main-dex-list='+listFile  //指定了要在主dex中打包的类的列表
-            dx.additionalParameters +='--minimal-main-dex'  //表明只有--main-dex-list所指定的类才能打包到主dex中
-        }
-    }
+//    afterEvaluate {
+//        println 'afterEvaluate'
+//        tasks.matching {
+//            it.name.startsWith('dex')
+//        }.each { dx->
+//            def listFile=project.rootDir.absolutePath+'app/maindexlist.txt'
+//            println "root dir:" + project.rootDir.absolutePath
+//            println "dex task found:" + dx.name
+//            if (dx.additionalParameters==null){
+//                dx.additionalParameters=[]
+//            }
+//            dx.additionalParameters +='--multi-dex'  //表示当方法数越界时 则生成多个dex文件
+//            dx.additionalParameters +='--main-dex-list='+listFile  //指定了要在主dex中打包的类的列表
+//            dx.additionalParameters +='--minimal-main-dex'  //表明只有--main-dex-list所指定的类才能打包到主dex中
+//        }
+//    }
 
 }
 
@@ -92,7 +92,7 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.android.support:cardview-v7:${rootProject.ext.supportLibVersion}"
 
-    implementation 'com.android.support:multidex:1.0.3'
+//    implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.orhanobut:logger:1.15'
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.jakewharton:butterknife:8.8.1'
@@ -114,7 +114,7 @@ dependencies {
     implementation 'com.facebook.fresco:fresco:1.8.1'
 
     // 支持 GIF 动图，需要添加
-    implementation 'com.facebook.fresco:animated-gif:0.12.0'
+//    implementation 'com.facebook.fresco:animated-gif:0.12.0'
 
     // 在 API < 14 上的机器支持 WebP 时，需要添加
 
@@ -147,11 +147,11 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
 
     //内存检测
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+//    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
     implementation project(':FlycoDialog_Lib')
-    implementation project(':generator')
+//    implementation project(':generator')
     implementation project(':network')
     api(name: 'janusgateway-debug', ext: 'aar')
 }

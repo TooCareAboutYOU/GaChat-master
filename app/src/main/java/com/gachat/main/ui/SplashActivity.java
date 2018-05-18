@@ -18,17 +18,17 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.blankj.utilcode.util.AppUtils;
-import com.gachat.generator.config.DaoQuery;
 import com.gachat.main.Constant;
 import com.gachat.main.R;
 import com.gachat.main.base.BaseActivity;
+import com.gachat.main.mvp.models.UpdateUserData;
 import com.gachat.main.ui.login.activity.LoginActivity;
 import com.gachat.main.util.JumpToActivityUtil;
+import com.gachat.main.util.SharedPreferencesHelper;
 import com.gachat.main.util.manager.ActivityManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class SplashActivity extends BaseActivity {
 
@@ -88,13 +88,19 @@ public class SplashActivity extends BaseActivity {
     //后续会去掉数据库记录登录用户登录状态
     void delayTime(){
         mHandler.postDelayed(() -> {
-            if (DaoQuery.queryUserlistSize() > 0) {
-                if (Objects.requireNonNull(DaoQuery.queryUserbean()).getIsLogin()) {
-                    JumpToActivityUtil.jumpNoParams(SplashActivity.this, MainActivity.class, true);
-                }
+            boolean isLogin=SharedPreferencesHelper.getInstance().getBooleanValueByKey(UpdateUserData.IS_LOGIN);
+            if (isLogin) {
+                JumpToActivityUtil.jumpNoParams(SplashActivity.this, MainActivity.class, true);
             }else {
                 JumpToActivityUtil.jumpNoParams(SplashActivity.this, LoginActivity.class, true);
             }
+//            if (DaoQuery.queryUserlistSize() > 0) {
+//                if (Objects.requireNonNull(DaoQuery.queryUserbean()).getIsLogin()) {
+//                    JumpToActivityUtil.jumpNoParams(SplashActivity.this, MainActivity.class, true);
+//                }
+//            }else {
+//                JumpToActivityUtil.jumpNoParams(SplashActivity.this, LoginActivity.class, true);
+//            }
         },500);
     }
 

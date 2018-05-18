@@ -65,40 +65,40 @@ public class GaChatFragment extends BaseFragment {
         mMatching=view.findViewById(R.id.img_matching);
 
 
-        RxView.clicks(mMatching)
-                .throttleWithTimeout(1, TimeUnit.SECONDS)
-                .subscribe(o -> {
-                    if (Constant.getChatConnect()) {
-                        Logger.d("开始跳转。。。。。");
-//                        JumpToActivityUtil.jumpNoParams(mActivity, ChatRoomActivity.class, false);
-                        Intent intent=new Intent(mActivity,ChatRoomActivity.class);
-                        startActivity(intent);
-//                JumpToActivityUtil.jumpNoParams(getActivity(), ChatsActivity.class, false);
-                    } else {
-                        ToastUtils.showShort("连接异常，重连中...");
-                        connectSDK();
-                    }
-                });
-
-//        view.findViewById(R.id.img_matching).setOnClickListener(v -> {
-//            if (Constant.getChatConnect()) {
-//                Logger.d("开始跳转。。。。。");
-//                JumpToActivityUtil.jumpNoParams(getActivity(), ChatRoomActivity.class, false);
+//        RxView.clicks(mMatching)
+//                .throttleWithTimeout(1, TimeUnit.SECONDS)
+//                .subscribe(o -> {
+//                    if (Constant.getChatConnect()) {
+//                        Logger.d("开始跳转。。。。。");
+////                        JumpToActivityUtil.jumpNoParams(mActivity, ChatRoomActivity.class, false);
+//                        Intent intent=new Intent(mActivity,ChatRoomActivity.class);
+//                        startActivity(intent);
 ////                JumpToActivityUtil.jumpNoParams(getActivity(), ChatsActivity.class, false);
-//            }
-//            else {
-//                ToastUtils.showShort("连接异常，重连中...");
-//                if (mActivity.UserData() != null) {
-//                    String uid = mActivity.UserData().getUid() + "";
-//                    String token = mActivity.UserData().getToken();
-//                    Log.i("DollRoomActivity", "Home uid：" + uid + "\t\ttoken：" + token);
-//                    VAChatAPI.getInstance().connect(Config.CHAT_SDK_URL, uid, token);
-//                }
-//            }
-//
-//        });
+//                    } else {
+//                        ToastUtils.showShort("连接异常，重连中...");
+//                        connectSDK();
+//                    }
+//                });
 
-        Glide.with(mActivity.getApplicationContext()).asGif().load(R.drawable.icon_waitpair).into(mGifView);
+        view.findViewById(R.id.img_matching).setOnClickListener(v -> {
+            if (Constant.getChatConnect()) {
+                Logger.d("开始跳转。。。。。");
+                JumpToActivityUtil.jumpNoParams(getActivity(), ChatRoomActivity.class, false);
+//                JumpToActivityUtil.jumpNoParams(getActivity(), ChatsActivity.class, false);
+            }
+            else {
+                ToastUtils.showShort("连接异常，重连中...");
+                if (mActivity.UserData() != null) {
+                    String uid = mActivity.UserData().getUid() + "";
+                    String token = mActivity.UserData().getToken();
+                    Log.i("DollRoomActivity", "Home uid：" + uid + "\t\ttoken：" + token);
+                    VAChatAPI.getInstance().connect(Config.CHAT_SDK_URL, uid, token);
+                }
+            }
+
+        });
+
+//        Glide.with(mActivity.getApplicationContext()).asGif().load(R.drawable.icon_waitpair).into(mGifView);
 
     }
 
@@ -106,7 +106,7 @@ public class GaChatFragment extends BaseFragment {
         if (mActivity.UserData() != null) {
             String uid = mActivity.UserData().getUid() + "";
             String token = mActivity.UserData().getToken();
-            Log.i("ApplicationHelper", "chat connecting ,uid=="+uid+"\t\ttoken=="+token);
+//            Log.i("ApplicationHelper", "chat connecting ,uid=="+uid+"\t\ttoken=="+token);
             VAChatAPI.getInstance().connect(Config.CHAT_SDK_URL,uid,token);
         }
     }

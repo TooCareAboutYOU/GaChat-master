@@ -30,9 +30,7 @@ public class MeetAgainDialogFragment extends BaseDialogFragment {
 
     @Override
     public void initView(View view) {
-        view.findViewById(R.id.cancel).setOnClickListener(v -> {
-            dismiss();
-        });
+        view.findViewById(R.id.cancel).setOnClickListener(v -> dismiss());
     }
 
 }

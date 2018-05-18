@@ -23,19 +23,21 @@ import com.dnion.DollRoomSignaling;
 import com.dnion.RenderProxy;
 import com.dnion.SharedRTCEnv;
 import com.dnion.VADollAPI;
-import com.dnion.VADollSignaling;
 import com.gachat.main.Constant;
 import com.gachat.main.R;
 import com.gachat.main.api.UserAPI;
-import com.gachat.main.application.ApplicationHelper;
 import com.gachat.main.base.BaseActivity;
 import com.gachat.main.base.BaseBean;
 import com.gachat.main.beans.RemoteVideoBean;
 import com.gachat.main.beans.UserBean;
-import com.gachat.main.event.SdkDollEvent;
+import com.gachat.main.event.MessageEventDoll;
 import com.gachat.main.mvp.models.UpdateUserData;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.orhanobut.logger.Logger;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +70,6 @@ public class DollRoomActivity extends BaseActivity{
 //    RelativeLayout mActionCatch;
     private TextView mTvTimer;
 
-    private SdkDollEventCallback callback;
     private boolean isJoinRoom = false;
     private boolean isJoinQueue=false;
     private boolean isStartGame=false;
@@ -107,7 +108,6 @@ public class DollRoomActivity extends BaseActivity{
         int width = outMetrics.widthPixels;
         int height = outMetrics.heightPixels;
         Log.i("initView", "屏幕宽: "+width+"\t\t高："+height);
-
         setBackIcon(R.drawable.ic_launcher_background);
         setToolbarBackgroundColor(Color.TRANSPARENT);
         mVideoBeans=new ArrayList<>();
@@ -140,11 +140,7 @@ public class DollRoomActivity extends BaseActivity{
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void initOperate(Bundle savedInstanceState) {
-        setBackIcon(R.drawable.ic_launcher_background);
-        setToolbarBackgroundColor(Color.TRANSPARENT);
-
-        callback=new SdkDollEventCallback();
-        ApplicationHelper.getInstance().setSdkDollListener(callback);
+//        ApplicationHelper.getInstance().setSdkDollListener(new SdkDollEventCallback());
 
         findViewById(R.id.img_back).setOnClickListener(v -> onBackPressed());
 
@@ -205,6 +201,7 @@ public class DollRoomActivity extends BaseActivity{
     @Override
     protected void onStart() {
         super.onStart();
+        EventBus.getDefault().register(this);
         FrameLayout.LayoutParams params= (FrameLayout.LayoutParams) mFlFullScreenView.getLayoutParams();
         params.width= ViewGroup.LayoutParams.MATCH_PARENT;
         params.height=(params.width*4)/3;
@@ -306,7 +303,6 @@ public class DollRoomActivity extends BaseActivity{
         mStartCountDownTimer.start();
     }
 
-
     private class StartCountDownTimer extends CountDownTimer {
         StartCountDownTimer(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
@@ -328,138 +324,63 @@ public class DollRoomActivity extends BaseActivity{
     }
 
 
-    private class SdkDollEventCallback implements SdkDollEvent {
-        @Override
-        public void onConnectionSuccess() {  runOnUiThread(() -> Log.i(TAG, "onConnectionSuccess: "));  }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onDollConnectState(MessageEventDoll.onDollConnectState event){
+        Log.i(TAG, "onDollConnectState: "+event.getStates()+"\t\t"+ event.getMsg());
+        switch (event.getStates()) {
+            case 0:   break;
+            case 1:   break;
+            case 2:   break;
 
-        @Override
-        public void onConnectionFailed(String s) {  runOnUiThread(() -> Log.i(TAG, "onConnectionFailed: ")); }
+        }
+    }
 
-        @Override
-        public void onDisconnected(String s) { runOnUiThread(() -> Log.i(TAG, "onDisconnected: ")); }
+    @SuppressLint("SetTextI18n")
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onJoinRoom(MessageEventDoll.onJoinRoom event){
+        Log.i(TAG, "onJoinRoom: ");
+        if (event.getInfo() != null) {
+            isJoinRoom = true;
 
-        @SuppressLint("SetTextI18n")
-        @Override
-        public void onJoinRoom(DollRoomSignaling.DOLLRoomInfo info) {
-            runOnUiThread(() -> {
-                if (info != null) {
-                    isJoinRoom = true;
+            Constant.setGameReadyTime((int)event.getInfo().time_ready);
+            Constant.setAgainTime((int)event.getInfo().time_tryagain);
 
-                    Constant.setGameReadyTime((int)info.time_ready);
-                    Constant.setAgainTime((int)info.time_tryagain);
+            cacheTime=(int)event.getInfo().time_game;  //重置时间
+            catchTime=(int)event.getInfo().time_game;  //游戏抓取时间
+            mTvTimer.setText(catchTime+"s");
 
-                    cacheTime=(int)info.time_game;  //重置时间
-                    catchTime=(int)info.time_game;  //游戏抓取时间
-                    mTvTimer.setText(catchTime+"s");
-
-                    needDiamonds=(int)info.golden;
+            needDiamonds=(int)event.getInfo().golden;
 
 //                    String str2="房间人数："+info.totalnum+"人";
 //                    mTvRoomMembers.setText(str2);
 
-                    String str="需要钻："+info.golden + "/次";
-                    mTvNeedSurplus.setText(str);
-                }
-            });
+            String str="需要钻："+event.getInfo().golden + "/次";
+            mTvNeedSurplus.setText(str);
         }
+    }
 
-        @Override
-        public void onJoinRoomFailed(String s, String s1) {
-            runOnUiThread(() -> {
-                isJoinRoom = false;
-                Toast.makeText(DollRoomActivity.this, "加入房间失败："+s1, Toast.LENGTH_SHORT).show();
-            });
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onJoinRoomFailed(MessageEventDoll.onJoinRoomFailed event){
+        Log.i(TAG, "onJoinRoomFailed: ");
+        isJoinRoom = false;
+        Toast.makeText(DollRoomActivity.this, "加入房间失败："+event.getMsg1()+"\t\t"+event.getMsg2(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onReadyGame(MessageEventDoll.onReadyGame event){
+        Log.i(TAG, "onReadyGame: ");
+        mTvTitleControl.setText("开始抓");
+        mRlControl.setBackgroundResource(R.drawable.icon_doll_state_yellow);
+        StartGameDialogFragment.getInstance().show(getSupportFragmentManager(),"startgame");
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onCatchResult(MessageEventDoll.onCatchResult event){
+        Log.i(TAG, "抓取结果 onCatchResult: "+event.getResult());
+        switch (event.getResult()){
+            case 2:{ new CatchFailedDialogFragment().show(getSupportFragmentManager(),"catchfailed"); break; }
+            case 3:{ new CatchSucDialogFragment().show(getSupportFragmentManager(),"catchsuc");  break;   }
         }
-
-        @Override
-        public void onLeaveRoom() {  runOnUiThread(() -> Log.i(TAG, "onLeaveRoom: "));  }
-
-        @Override
-        public void onReadyGame() {
-            runOnUiThread(() -> {
-                Log.i(TAG, "onReadyGame: ");
-                mTvTitleControl.setText("开始抓");
-                mRlControl.setBackgroundResource(R.drawable.icon_doll_state_yellow);
-                StartGameDialogFragment.getInstance().show(getSupportFragmentManager(),"startgame");
-            });
-        }
-
-        @Override
-        public void onStartGame(long golden) {
-            runOnUiThread(() -> {
-                updateDiamonds();
-//                String str="剩余钻石："+ golden + "钻";
-//                mTvSurplusDiamonds.setText(str);
-                isJoinQueue=true;
-                mImgRecharge.setVisibility(View.GONE);
-                mRlControl.setVisibility(View.GONE);
-                mRlUserInfo.setVisibility(View.GONE);
-                initCatchTimer();
-                mRlActionCatch.setVisibility(View.VISIBLE);
-                Log.i(TAG, "onStartGame  catchTime："+catchTime+"\t\t\t"+golden);
-            });
-        }
-
-        @Override
-        public void onStartGameFailed(long l, String s) {  runOnUiThread(() -> Log.i(TAG, "onStartGameFailed: "));  }
-
-        @Override
-        public void onRefreshRoomInfo(VADollSignaling.RoomInfo roomInfo) {  runOnUiThread(() -> Log.i(TAG, "onRefreshRoomInfo: "+roomInfo.membersCount));  }
-
-        @Override
-        public void onUserJoin(VADollSignaling.UserInfo userInfo) {  runOnUiThread(() -> Log.i(TAG, "onUserJoin: "));  }
-
-        @Override
-        public void onUserUpdate(VADollSignaling.UserInfo userInfo) {  runOnUiThread(() -> Log.i(TAG, "onUserUpdate: "));  }
-
-        @Override
-        public void onUserLeave(VADollSignaling.UserInfo userInfo) {  runOnUiThread(() -> Log.i(TAG, "onUserLeave: "));  }
-
-        @Override
-        public void onGotUserVideo(String s) {
-            runOnUiThread(() -> {
-                Log.i("UserVideo", "onGotUserVideo: "+s);
-                RenderProxy fullRenderProxy = SharedRTCEnv.getInstance().createRenderProxy(DollRoomActivity.this);
-                fullRenderProxy.setAspectMode(RenderProxy.AspectMode.aspectFill);
-                SurfaceView mSurfaceView = fullRenderProxy.getDisplay();
-                String videoI=s.substring(0,6);
-                mFlFullScreenView.addView(mSurfaceView);
-                if (videoI.equals("video0")) {
-                    mSurfaceView.setVisibility(View.VISIBLE);
-                    isVideo0=true;
-                } else {
-                    mSurfaceView.setVisibility(View.GONE);
-                }
-                mVideoBeans.add(new RemoteVideoBean(videoI,mSurfaceView));
-                VADollAPI.getInstance().setRemoteDisplay(mSurfaceView, s);
-            });
-        }
-
-        @Override
-        public void onLostUserVideo(String s) {
-            runOnUiThread(() -> {
-                Log.i("UserVideo", "onLostUserVideo: "+s);
-                String videoI=s.substring(0,6);
-                int size=mVideoBeans.size();
-                int i;
-                for (i = 0; i < size; i++) {
-                    if (videoI.equals(mVideoBeans.get(i).getStreamId())){
-                        SurfaceView view=mVideoBeans.get(i).getSurfaceView();
-                        mFlFullScreenView.removeView(view);
-                        break;
-                    }
-                }
-            });
-        }
-
-        @Override
-        public void onCatchResult(int i) {
-            runOnUiThread(() -> {
-                Log.i(TAG, "抓取结果 onCatchResult: "+i);
-                switch (i){
-                    case 2:{ new CatchFailedDialogFragment().show(getSupportFragmentManager(),"catchfailed"); break; }
-                    case 3:{ new CatchSucDialogFragment().show(getSupportFragmentManager(),"catchsuc");  break;   }
-                }
 //                if (mTimer !=null &&  mTimerTask != null) {
 //                    Log.i(TAG, "抓取计时器重置: ");
 //                    mTimer.purge();
@@ -469,47 +390,122 @@ public class DollRoomActivity extends BaseActivity{
 //                    mTimer=null;
 //                    catchTime=cacheTime;
 //                }
-                if (mStartCountDownTimer != null) {
-                    mStartCountDownTimer.cancel();
-                    mStartCountDownTimer=null;
-                }
+        if (mStartCountDownTimer != null) {
+            mStartCountDownTimer.cancel();
+            mStartCountDownTimer=null;
+        }
 //                catchTime=cacheTime;
-            });
-        }
+    }
 
-        @Override
-        public void onQueueInfoUpdate(DollRoomSignaling.DOLLRoomInfo info,DollRoomSignaling.DOLLVAUserInfo dollvaUserInfo) {
-            runOnUiThread(() -> {
-                Logger.d("onQueueInfoUpdate："+info);
-                if (info != null) {
-                    String str3 = info.shownum + "人排队";
-                    mTvUserMember.setText(str3);
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onQueueInfoUpdate(MessageEventDoll.onQueueInfoUpdate event){
+        Logger.d("onQueueInfoUpdate：");
+        if (event.getRoomInfo() != null) {
+            String str3 = event.getRoomInfo().shownum + "人排队";
+            mTvUserMember.setText(str3);
 
-                    String str2="房间人数："+info.totalnum+"人";
-                    mTvRoomMembers.setText(str2);
+            String str2="房间人数："+event.getRoomInfo().totalnum+"人";
+            mTvRoomMembers.setText(str2);
 
-                    if (info.shownum == 0) {
-                        mtvCatchName.setText("");
-                        mTvTitleControl.setText("开始抓");
-                        mRlControl.setBackgroundResource(R.drawable.icon_doll_state_yellow);
-                        isStartGame = true;
-                    } else {
-                        if (!isJoinQueue) {
-                            mTvTitleControl.setText("申请排队");
-                            mRlControl.setBackgroundResource(R.drawable.icon_doll_state_blue);
-                        }
-                        isStartGame = false;
-                    }
-
-                    if (!TextUtils.isEmpty(dollvaUserInfo.username)) {
-                        mtvCatchName.setText(dollvaUserInfo.username);
-                    }
+            if (event.getRoomInfo().shownum == 0) {
+                Log.i(TAG, "onQueueInfoUpdate: 房间没人开始抓");
+                mtvCatchName.setText("");
+                mTvTitleControl.setText("开始抓");
+                mRlControl.setBackgroundResource(R.drawable.icon_doll_state_yellow);
+                isStartGame = true;
+            } else {
+                if (!isJoinQueue) {
+                    mTvTitleControl.setText("申请排队");
+                    mRlControl.setBackgroundResource(R.drawable.icon_doll_state_blue);
                 }
-            });
-        }
+                isStartGame = false;
+            }
 
-        @Override
-        public void onTextMessage(String s, String s1) {  runOnUiThread(() -> Log.i(TAG, "onUserUpdate: "));  }
+            if (!TextUtils.isEmpty(event.getUserInfo().username)) {
+                mtvCatchName.setText(event.getUserInfo().username);
+            }
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onStartGame(MessageEventDoll.onStartGame event){
+        updateDiamonds();
+        isJoinQueue=true;
+        mImgRecharge.setVisibility(View.GONE);
+        mRlControl.setVisibility(View.GONE);
+        mRlUserInfo.setVisibility(View.GONE);
+        initCatchTimer();
+        mRlActionCatch.setVisibility(View.VISIBLE);
+        Log.i(TAG, "onStartGame  catchTime："+catchTime+"\t\t\t"+event.getGolden());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onStartGameFailed(MessageEventDoll.onStartGameFailed event){
+        Log.i(TAG, "onStartGameFailed: ");
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onRefreshRoomInfo(MessageEventDoll.onRefreshRoomInfo event){
+        Log.i(TAG, "onRefreshRoomInfo: ");
+    }
+    
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLeaveRoom(MessageEventDoll.onLeaveRoom event){
+        Log.i(TAG, "onLeaveRoom: ");
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUserJoin(MessageEventDoll.onUserJoin event){
+        Log.i(TAG, "onUserJoin: ");
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUserUpdate(MessageEventDoll.onUserUpdate event){
+        Log.i(TAG, "onUserUpdate: ");
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUserLeave(MessageEventDoll.onUserLeave event){
+        Log.i(TAG, "onUserLeave: ");
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onGotUserVideo(MessageEventDoll.onGotUserVideo event){
+        Log.i(TAG, "onGotUserVideo: ");
+        Log.i("UserVideo", "onGotUserVideo: "+event.getMsg());
+        RenderProxy fullRenderProxy = SharedRTCEnv.getInstance().createRenderProxy(DollRoomActivity.this);
+        fullRenderProxy.setAspectMode(RenderProxy.AspectMode.aspectFill);
+        SurfaceView mSurfaceView = fullRenderProxy.getDisplay();
+        String videoI=event.getMsg().substring(0,6);
+        mFlFullScreenView.addView(mSurfaceView);
+        if (videoI.equals("video0")) {
+            mSurfaceView.setVisibility(View.VISIBLE);
+            isVideo0=true;
+        } else {
+            mSurfaceView.setVisibility(View.GONE);
+        }
+        mVideoBeans.add(new RemoteVideoBean(videoI,mSurfaceView));
+        VADollAPI.getInstance().setRemoteDisplay(mSurfaceView, event.getMsg());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLostUserVideo(MessageEventDoll.onLostUserVideo event){
+        Log.i(TAG, "onLostUserVideo: ");
+        String videoI=event.getMsg().substring(0,6);
+        int size=mVideoBeans.size();
+        int i;
+        for (i = 0; i < size; i++) {
+            if (videoI.equals(mVideoBeans.get(i).getStreamId())){
+                SurfaceView view=mVideoBeans.get(i).getSurfaceView();
+                mFlFullScreenView.removeView(view);
+                break;
+            }
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onTextMessage(MessageEventDoll.onTextMessage event){
+        Log.i(TAG, "onTextMessage: ");
     }
 
     //仅仅更新钻石字段
@@ -552,10 +548,16 @@ public class DollRoomActivity extends BaseActivity{
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
     protected void onDestroy() {
         close();
         super.onDestroy();
-        ApplicationHelper.getInstance().getRefWatcher().watch(this);
+//        ApplicationHelper.getInstance().getRefWatcher().watch(this);
     }
 
     void close() {
@@ -581,8 +583,192 @@ public class DollRoomActivity extends BaseActivity{
         }
         mVideoBeans.clear();
         mFlFullScreenView=null;
-        callback=null;
     }
+
+
+//    private class SdkDollEventCallback implements SdkDollEvent {
+//        @Override
+//        public void onConnectionSuccess() {  runOnUiThread(() -> Log.i(TAG, "onConnectionSuccess: "));  }
+//
+//        @Override
+//        public void onConnectionFailed(String s) {  runOnUiThread(() -> Log.i(TAG, "onConnectionFailed: ")); }
+//
+//        @Override
+//        public void onDisconnected(String s) { runOnUiThread(() -> Log.i(TAG, "onDisconnected: ")); }
+//
+//        @SuppressLint("SetTextI18n")
+//        @Override
+//        public void onJoinRoom(DollRoomSignaling.DOLLRoomInfo info) {
+//            runOnUiThread(() -> {
+//                if (info != null) {
+//                    isJoinRoom = true;
+//
+//                    Constant.setGameReadyTime((int)info.time_ready);
+//                    Constant.setAgainTime((int)info.time_tryagain);
+//
+//                    cacheTime=(int)info.time_game;  //重置时间
+//                    catchTime=(int)info.time_game;  //游戏抓取时间
+//                    mTvTimer.setText(catchTime+"s");
+//
+//                    needDiamonds=(int)info.golden;
+//
+////                    String str2="房间人数："+info.totalnum+"人";
+////                    mTvRoomMembers.setText(str2);
+//
+//                    String str="需要钻："+info.golden + "/次";
+//                    mTvNeedSurplus.setText(str);
+//                }
+//            });
+//        }
+//
+//        @Override
+//        public void onJoinRoomFailed(String s, String s1) {
+//            runOnUiThread(() -> {
+//                isJoinRoom = false;
+//                Toast.makeText(DollRoomActivity.this, "加入房间失败："+s1, Toast.LENGTH_SHORT).show();
+//            });
+//        }
+//
+//        @Override
+//        public void onLeaveRoom() {  runOnUiThread(() -> Log.i(TAG, "onLeaveRoom: "));  }
+//
+//        @Override
+//        public void onReadyGame() {
+//            runOnUiThread(() -> {
+//                Log.i(TAG, "onReadyGame: ");
+//                mTvTitleControl.setText("开始抓");
+//                mRlControl.setBackgroundResource(R.drawable.icon_doll_state_yellow);
+//                StartGameDialogFragment.getInstance().show(getSupportFragmentManager(),"startgame");
+//            });
+//        }
+//
+//        @Override
+//        public void onStartGame(long golden) {
+//            runOnUiThread(() -> {
+//                updateDiamonds();
+////                String str="剩余钻石："+ golden + "钻";
+////                mTvSurplusDiamonds.setText(str);
+//                isJoinQueue=true;
+//                mImgRecharge.setVisibility(View.GONE);
+//                mRlControl.setVisibility(View.GONE);
+//                mRlUserInfo.setVisibility(View.GONE);
+//                initCatchTimer();
+//                mRlActionCatch.setVisibility(View.VISIBLE);
+//                Log.i(TAG, "onStartGame  catchTime："+catchTime+"\t\t\t"+golden);
+//            });
+//        }
+//
+//        @Override
+//        public void onStartGameFailed(long l, String s) {  runOnUiThread(() -> Log.i(TAG, "onStartGameFailed: "));  }
+//
+//        @Override
+//        public void onRefreshRoomInfo(VADollSignaling.RoomInfo roomInfo) {  runOnUiThread(() -> Log.i(TAG, "onRefreshRoomInfo: "+roomInfo.membersCount));  }
+//
+//        @Override
+//        public void onUserJoin(VADollSignaling.UserInfo userInfo) {  runOnUiThread(() -> Log.i(TAG, "onUserJoin: "));  }
+//
+//        @Override
+//        public void onUserUpdate(VADollSignaling.UserInfo userInfo) {  runOnUiThread(() -> Log.i(TAG, "onUserUpdate: "));  }
+//
+//        @Override
+//        public void onUserLeave(VADollSignaling.UserInfo userInfo) {  runOnUiThread(() -> Log.i(TAG, "onUserLeave: "));  }
+//
+//        @Override
+//        public void onGotUserVideo(String s) {
+//            runOnUiThread(() -> {
+//                Log.i("UserVideo", "onGotUserVideo: "+s);
+//                RenderProxy fullRenderProxy = SharedRTCEnv.getInstance().createRenderProxy(DollRoomActivity.this);
+//                fullRenderProxy.setAspectMode(RenderProxy.AspectMode.aspectFill);
+//                SurfaceView mSurfaceView = fullRenderProxy.getDisplay();
+//                String videoI=s.substring(0,6);
+//                mFlFullScreenView.addView(mSurfaceView);
+//                if (videoI.equals("video0")) {
+//                    mSurfaceView.setVisibility(View.VISIBLE);
+//                    isVideo0=true;
+//                } else {
+//                    mSurfaceView.setVisibility(View.GONE);
+//                }
+//                mVideoBeans.add(new RemoteVideoBean(videoI,mSurfaceView));
+//                VADollAPI.getInstance().setRemoteDisplay(mSurfaceView, s);
+//            });
+//        }
+//
+//        @Override
+//        public void onLostUserVideo(String s) {
+//            runOnUiThread(() -> {
+//                Log.i("UserVideo", "onLostUserVideo: "+s);
+//                String videoI=s.substring(0,6);
+//                int size=mVideoBeans.size();
+//                int i;
+//                for (i = 0; i < size; i++) {
+//                    if (videoI.equals(mVideoBeans.get(i).getStreamId())){
+//                        SurfaceView view=mVideoBeans.get(i).getSurfaceView();
+//                        mFlFullScreenView.removeView(view);
+//                        break;
+//                    }
+//                }
+//            });
+//        }
+//
+//        @Override
+//        public void onCatchResult(int i) {
+//            runOnUiThread(() -> {
+//                Log.i(TAG, "抓取结果 onCatchResult: "+i);
+//                switch (i){
+//                    case 2:{ new CatchFailedDialogFragment().show(getSupportFragmentManager(),"catchfailed"); break; }
+//                    case 3:{ new CatchSucDialogFragment().show(getSupportFragmentManager(),"catchsuc");  break;   }
+//                }
+////                if (mTimer !=null &&  mTimerTask != null) {
+////                    Log.i(TAG, "抓取计时器重置: ");
+////                    mTimer.purge();
+////                    mTimerTask.cancel();
+////                    mTimer.cancel();
+////                    mTimerTask=null;
+////                    mTimer=null;
+////                    catchTime=cacheTime;
+////                }
+//                if (mStartCountDownTimer != null) {
+//                    mStartCountDownTimer.cancel();
+//                    mStartCountDownTimer=null;
+//                }
+////                catchTime=cacheTime;
+//            });
+//        }
+//
+//        @Override
+//        public void onQueueInfoUpdate(DollRoomSignaling.DOLLRoomInfo info,DollRoomSignaling.DOLLVAUserInfo dollvaUserInfo) {
+//            runOnUiThread(() -> {
+//                Logger.d("onQueueInfoUpdate："+info);
+//                if (info != null) {
+//                    String str3 = info.shownum + "人排队";
+//                    mTvUserMember.setText(str3);
+//
+//                    String str2="房间人数："+info.totalnum+"人";
+//                    mTvRoomMembers.setText(str2);
+//
+//                    if (info.shownum == 0) {
+//                        mtvCatchName.setText("");
+//                        mTvTitleControl.setText("开始抓");
+//                        mRlControl.setBackgroundResource(R.drawable.icon_doll_state_yellow);
+//                        isStartGame = true;
+//                    } else {
+//                        if (!isJoinQueue) {
+//                            mTvTitleControl.setText("申请排队");
+//                            mRlControl.setBackgroundResource(R.drawable.icon_doll_state_blue);
+//                        }
+//                        isStartGame = false;
+//                    }
+//
+//                    if (!TextUtils.isEmpty(dollvaUserInfo.username)) {
+//                        mtvCatchName.setText(dollvaUserInfo.username);
+//                    }
+//                }
+//            });
+//        }
+//
+//        @Override
+//        public void onTextMessage(String s, String s1) {  runOnUiThread(() -> Log.i(TAG, "onUserUpdate: "));  }
+//    }
 
 
 }

@@ -98,7 +98,8 @@ public class LoginActivity extends BaseActivity implements OnPresenterListener.O
         Log.i(TAG, "activity onSuccess: "+result.toString());
         if (result.getCode() == 0 && result.getResult() != null) {
             if (result.getResult().getUser() != null){
-                UpdateUserData.getInstance().insertUserData(result);
+//                UpdateUserData.getInstance().insertUserData(result);
+                UpdateUserData.getInstance().saveUserData(result);
                 JumpToActivityUtil.jumpNoParams(LoginActivity.this, MainActivity.class, true);
 
             }

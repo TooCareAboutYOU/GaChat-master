@@ -2,7 +2,6 @@ package com.gachat.main.application;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
 import android.util.Log;
 
 
@@ -16,14 +15,14 @@ public class MyApplication extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         Log.i(TAG, "MyApplication attachBaseContext: " + System.currentTimeMillis());
-        MultiDex.install(this);
+//        MultiDex.install(this);
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
         sInstance = this;
-        ApplicationHelper.getInstance().init(this);
+        ApplicationHelper.init(this);
 
 
     }

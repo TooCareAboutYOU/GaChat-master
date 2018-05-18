@@ -70,17 +70,17 @@ public class RepairDialogFragment extends BaseDialogFragment implements OnPresen
 
     @Override
     public void onSuccess(BaseBean<MessageBean> result) {
-        if (result != null) {
             switch (result.getCode()) {
                 case 0:{  break;}
                 case 10031:{  break;}
                 case 10401:{  break;}
                 case 10400:{  break;}
             }
-            if (!TextUtils.isEmpty(result.getResult().getMessage())) {
-                ToastUtils.showShort(result.getResult().getMessage());
+            if (result.getResult() != null) {
+                if (!TextUtils.isEmpty(result.getResult().getMessage())) {
+                    ToastUtils.showShort(result.getResult().getMessage());
+                }
             }
-        }
     }
 
     @Override

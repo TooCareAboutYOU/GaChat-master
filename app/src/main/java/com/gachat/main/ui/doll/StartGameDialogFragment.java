@@ -92,6 +92,7 @@ public class StartGameDialogFragment extends BaseDialogFragment  implements Dial
                     startCountDownTimer=null;
                 }
             }
+
             return true;
         }else {
             return false;
@@ -118,5 +119,13 @@ public class StartGameDialogFragment extends BaseDialogFragment  implements Dial
             mActivity.get().Reset();
             dismiss();
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (mTvTimer != null) {
+            mTvTimer=null;
+        }
+        super.onDestroyView();
     }
 }

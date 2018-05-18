@@ -59,19 +59,19 @@
 
 
         <!-- 监听Android系统开启 -->
-        <receiver
-            android:name=".base.broadcastreciver.PoweringBroadCastReceiver"
-            android:enabled="false"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MEDIA_MOUNTED" />
-                <action android:name="android.intent.action.MEDIA_UNMOUNTED" />
-                <data android:scheme="file" />
-            </intent-filter>
-        </receiver>
+        <!--<receiver-->
+            <!--android:name=".base.broadcastreciver.PoweringBroadCastReceiver"-->
+            <!--android:enabled="false"-->
+            <!--android:exported="false">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.BOOT_COMPLETED" />-->
+            <!--</intent-filter>-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MEDIA_MOUNTED" />-->
+                <!--<action android:name="android.intent.action.MEDIA_UNMOUNTED" />-->
+                <!--<data android:scheme="file" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
 
         <activity
             android:name=".ui.SplashActivity"

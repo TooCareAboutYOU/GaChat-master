@@ -2,7 +2,6 @@ package com.gachat.main.api;
 
 import android.util.Log;
 
-import com.gachat.generator.config.DaoQuery;
 import com.gachat.main.base.BaseBean;
 import com.gachat.main.beans.CheckSmsCodeBean;
 import com.gachat.main.beans.DollBannerBean;
@@ -16,9 +15,9 @@ import com.gachat.main.beans.RechargeListBean;
 import com.gachat.main.beans.RegisterBean;
 import com.gachat.main.beans.SmsCodeBean;
 import com.gachat.main.beans.UserBean;
+import com.gachat.main.mvp.models.UpdateUserData;
+import com.gachat.main.util.SharedPreferencesHelper;
 import com.gachat.network.HttpManager;
-
-import java.util.Objects;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -158,12 +157,21 @@ public class UserAPI extends HttpManager {
         return setSubscribe(mUserService.resetPwdImpl(mobile,capcha,password),observer);
     }
 
-    private static String token(){return Objects.requireNonNull(DaoQuery.queryUserbean()).getToken();}
-    private static int uid(){return Objects.requireNonNull(DaoQuery.queryUserbean()).getUid(); }
+    private static String token(){
+        return SharedPreferencesHelper.getInstance().getStringValueByKey(UpdateUserData.TOKEN);
+//        return Objects.requireNonNull(DaoQuery.queryUserbean()).getToken();
+    }
+    private static int uid() {
+        return SharedPreferencesHelper.getInstance().getIntValueByKey(UpdateUserData.UID);
+//        return Objects.requireNonNull(DaoQuery.queryUserbean()).getUid();
+//    }
+    }
 
+    private static boolean isLogin() {  return SharedPreferencesHelper.getInstance().getBooleanValueByKey(UpdateUserData.IS_LOGIN);  }
     //获取用户信息
     public static Subscription getUserData(Observer<BaseBean<UserBean>> observer){
-        if (DaoQuery.queryUserlistSize() > 0) {
+//        if (DaoQuery.queryUserlistSize() > 0) {
+        if(isLogin()){
             Log.i("UpdateUserData", "访问网络更新用户信息 getUserData: ");
             return setSubscribe(mUserService.getUserData(token(), uid()),observer);
         }
@@ -172,7 +180,8 @@ public class UserAPI extends HttpManager {
 
     //反馈意见
     public static Subscription sendFeedBacks(String content,String mobile,Observer<BaseBean<FeedBackBean>> observer){
-        if (DaoQuery.queryUserlistSize() > 0) {
+//        if (DaoQuery.queryUserlistSize() > 0) {
+        if(isLogin()){
             return setSubscribe(mUserService.sendFeedBacks(token(),content, mobile),observer);
         }
         return null;
@@ -180,7 +189,8 @@ public class UserAPI extends HttpManager {
 
     //查询礼物列表 getUserGiftlist
     public static Subscription getUserGiftlist(QueryType type,Observer<BaseBean<GiftListBean>> observer){
-        if (DaoQuery.queryUserlistSize() > 0) {
+//        if (DaoQuery.queryUserlistSize() > 0) {
+        if(isLogin()){
             String querytype;
             switch (type) {
                 case ALL: {  querytype="all";  break;  }

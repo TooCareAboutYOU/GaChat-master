@@ -14,8 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.gachat.generator.config.DaoInsert;
-import com.gachat.generator.model.UserBean;
 import com.gachat.main.Constant;
 import com.gachat.main.R;
 import com.gachat.main.base.BaseBean;
@@ -23,6 +21,7 @@ import com.gachat.main.base.BaseFragment;
 import com.gachat.main.beans.LoginBean;
 import com.gachat.main.beans.RegisterBean;
 import com.gachat.main.mvp.impls.OnPresenterListener;
+import com.gachat.main.mvp.models.UpdateUserData;
 import com.gachat.main.mvp.presenters.LoginPresenter;
 import com.gachat.main.mvp.presenters.RegisterPresenter;
 import com.gachat.main.ui.MainActivity;
@@ -31,6 +30,7 @@ import com.gachat.main.util.JumpToActivityUtil;
 import com.gachat.main.util.SharedPreferencesHelper;
 import com.gachat.main.util.widgets.BottomDialog;
 import com.gachat.main.util.widgets.wheelview.WheelView;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -205,17 +205,19 @@ public class RegisterPerfectInfoFragment extends BaseFragment implements OnPrese
             if (result.getCode() == 0 && result.getResult() != null) {
                 LoginBean loginBean=result.getResult();
                 if (result.getResult().getUser() != null){
-                    UserBean bean=new UserBean(null,true,"JWT "+loginBean.getToken(),
-                            result.getResult().getUser().getUsername(),
-                            result.getResult().getUser().getGender(),
-                            result.getResult().getUser().getDiamond(),
-                            result.getResult().getUser().getUid(),
-                            result.getResult().getUser().getAge(),
-                            result.getResult().getUser().getCharacter(),
-                            result.getResult().getUser().getRank(),
-                            result.getResult().getUser().getClaw_doll_time(),
-                            result.getResult().getUser().getGift());
-                    DaoInsert.insertUser(bean);
+//                    UserBean bean=new UserBean(null,true,"JWT "+loginBean.getToken(),
+//                            result.getResult().getUser().getUsername(),
+//                            result.getResult().getUser().getGender(),
+//                            result.getResult().getUser().getDiamond(),
+//                            result.getResult().getUser().getUid(),
+//                            result.getResult().getUser().getAge(),
+//                            result.getResult().getUser().getCharacter(),
+//                            result.getResult().getUser().getRank(),
+//                            result.getResult().getUser().getClaw_doll_time(),
+//                            result.getResult().getUser().getGift());
+//                    DaoInsert.insertUser(bean);
+                    UpdateUserData.getInstance().saveUserData(result);
+
                     SharedPreferencesHelper.getInstance().setBooleanValue(Constant.LOGIN_STATUE,Constant.IsTrue);
                 }
                 JumpToActivityUtil.jumpNoParams(mActivity.get(), MainActivity.class, true);

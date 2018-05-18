@@ -43,6 +43,7 @@ public class RechargeDialogFragment extends BaseDialogFragment implements OnPres
 
     private RadioGroup mRadioGroup;
     private RecyclerView mPriceRecyclerView;
+    private LinearLayoutManager manager;
     private GetRechargeListPresenter mPresenter;
     private List<RechargeListBean.GoodsInfoBean> mList;
     private PriceListAdapter mAdapter;
@@ -91,7 +92,7 @@ public class RechargeDialogFragment extends BaseDialogFragment implements OnPres
 
         mPresenter=new GetRechargeListPresenter(this);
 
-        LinearLayoutManager manager=new LinearLayoutManager(getContext());
+        manager=new LinearLayoutManager(getContext());
         mPriceRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity.get(),DividerItemDecoration.VERTICAL));
         mPriceRecyclerView.setLayoutManager(manager);
         mPriceRecyclerView.setAdapter(mAdapter);
@@ -181,9 +182,14 @@ public class RechargeDialogFragment extends BaseDialogFragment implements OnPres
             mAdapter=null;
         }
 
+
         if (mPriceRecyclerView != null) {
             mPriceRecyclerView.removeAllViews();
             mPriceRecyclerView=null;
+        }
+
+        if (manager != null) {
+            manager=null;
         }
 
         super.onDestroyView();

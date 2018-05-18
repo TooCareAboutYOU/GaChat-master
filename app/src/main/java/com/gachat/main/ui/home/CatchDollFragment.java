@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,10 +48,10 @@ public class CatchDollFragment extends BaseFragment {
 
     private static final String TAG = "CatchDollFragment";
     
-    ImageView mLoadingView;
-    Banner mBanner;
-    RecyclerView mRecyclerView;
-    SwipeRefreshLayout mSwipeLayout;
+    private Banner mBanner;
+    private RecyclerView mRecyclerView;
+    private SwipeRefreshLayout mSwipeLayout;
+    private ScrollView mScrollView;
 
     private GetDollPageDataPresenter mBannersPresenter, mListPresenter;
 
@@ -79,10 +80,10 @@ public class CatchDollFragment extends BaseFragment {
         mListPresenter = new GetDollPageDataPresenter(new LoadList());
         mListBeanList = new ArrayList<>();
 
-        mLoadingView=view.findViewById(R.id.img_loading);
         mBanner=view.findViewById(R.id.banner);
         mRecyclerView=view.findViewById(R.id.recyclerView);
         mSwipeLayout=view.findViewById(R.id.swipeLayout);
+        mScrollView=view.findViewById(R.id.scrollView);
 
         mBanner.setImageLoader(new FrescoImageLoader());
         mBanner.isAutoPlay(true);
@@ -99,7 +100,7 @@ public class CatchDollFragment extends BaseFragment {
             mListPresenter.getDollList(1);
         }));
 
-        loadData();
+        init();
 
     }
 
@@ -109,10 +110,9 @@ public class CatchDollFragment extends BaseFragment {
         if (!Constant.getDollConnect()) {
             connectSDK();
         }
-
         if (isVisible) {
             Log.i("isVisible", "onFragmentVisibleChange: CatchDollFragment 显示");
-//            loadData();
+//            init();
         }else {
             Log.i("isVisible", "onFragmentVisibleChange: CatchDollFragment 隐藏");
             if (mSwipeLayout != null && mSwipeLayout.isRefreshing()) {
@@ -125,12 +125,12 @@ public class CatchDollFragment extends BaseFragment {
         if (mActivity.UserData() != null) {
             String uid = mActivity.UserData().getUid() + "";
             String token = mActivity.UserData().getToken();
-            Log.i("ApplicationHelper", "doll connecting: ,uid=="+uid+"\t\t token=="+token);
+//            Log.i("ApplicationHelper", "doll connecting: ,uid=="+uid+"\t\t token=="+token);
             VADollAPI.getInstance().connect(Config.DOLL_SDK_URL, uid, token);
         }
     }
 
-    void loadData() {
+    void init() {
         if (mRecyclerViewAdapter == null) {
             //  https://blog.csdn.net/coralline_xss/article/details/72887136
             manager = new GridLayoutManager(getContext(), 2){
@@ -156,15 +156,24 @@ public class CatchDollFragment extends BaseFragment {
     public class LoadBanner implements OnPresenterListener.OnViewListener<BaseBean<DollBannerBean>> {
         @Override
         public void onSuccess(BaseBean<DollBannerBean> result) {
-            if (result.getCode() == 0 && result.getResult() != null && result.getResult().getBanners().size()>0) {
-                mBanner.update(result.getResult().getBanners());
-                mLoadingView.setVisibility(View.GONE);
+            if (result.getCode() == 0) {
+                if (result.getResult() != null && result.getResult().getBanners().size()>0) {
+                    mBanner.update(result.getResult().getBanners());
+                    mScrollView.setVisibility(View.VISIBLE);
+                }
+            }else {
+                if (result.getError() != null) {
+                    for (String s : result.getError().getMessage()) {
+                        ToastUtils.showShort(s);
+                    }
+                }
             }
             mSwipeLayout.setRefreshing(false);
         }
 
         @Override
         public void onFailed(Throwable e) {
+            ToastUtils.showShort(e.getMessage());
             mSwipeLayout.setRefreshing(false);
         }
     }
@@ -174,21 +183,28 @@ public class CatchDollFragment extends BaseFragment {
         @Override
         public void onSuccess(BaseBean<DollListBean> result) {
 
-            if (result.getCode() == 0 && result.getResult() != null) {
-
-                if (result.getResult().getRooms().size() > 0) {
-                    mListBeanList.clear();
-                    mListBeanList.addAll(result.getResult().getRooms());
-                    mLoadingView.setVisibility(View.GONE);
+            if (result.getCode() == 0) {
+                if (result.getResult() != null) {
+                    if (result.getResult().getRooms().size() > 0) {
+                        mListBeanList.clear();
+                        mListBeanList.addAll(result.getResult().getRooms());
+                        mScrollView.setVisibility(View.VISIBLE);
+                    }
+                    mRecyclerViewAdapter.notifyDataSetChanged();
                 }
-                mRecyclerViewAdapter.notifyDataSetChanged();
-                mSwipeLayout.setRefreshing(false);
+            }else {
+                if (result.getError() != null) {
+                    for (String s : result.getError().getMessage()) {
+                        ToastUtils.showShort(s);
+                    }
+                }
             }
-
+            mSwipeLayout.setRefreshing(false);
         }
 
         @Override
         public void onFailed(Throwable e) {
+            ToastUtils.showShort(e.getMessage());
             mSwipeLayout.setRefreshing(false);
         }
     }

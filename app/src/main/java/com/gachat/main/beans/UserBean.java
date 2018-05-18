@@ -6,6 +6,8 @@ import java.io.Serializable;
 
 public class UserBean implements Serializable{
 
+    private boolean isLogin;
+    private String token;
     private String username;
     private String gender;
     private int diamond;
@@ -21,7 +23,11 @@ public class UserBean implements Serializable{
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("{");
-        sb.append("\"username\":\"")
+        sb.append("\"isLogin\":")
+                .append(isLogin);
+        sb.append(",\"token\":\"")
+                .append(token).append('\"');
+        sb.append(",\"username\":\"")
                 .append(username).append('\"');
         sb.append(",\"gender\":\"")
                 .append(gender).append('\"');
@@ -41,6 +47,20 @@ public class UserBean implements Serializable{
                 .append(gift);
         sb.append('}');
         return sb.toString();
+    }
+
+
+
+    public void setLogin(boolean login) {
+        isLogin = login;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getUsername() {
