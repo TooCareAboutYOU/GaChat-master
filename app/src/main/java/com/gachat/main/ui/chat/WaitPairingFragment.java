@@ -3,10 +3,7 @@ package com.gachat.main.ui.chat;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -34,8 +31,6 @@ public class WaitPairingFragment extends BaseDialogFragment {
         return instance;
     }
 
-    private boolean isExist=false;
-
     private ImageView mBack;
 
     private WeakReference<ChatRoomActivity> mActivity;
@@ -46,26 +41,6 @@ public class WaitPairingFragment extends BaseDialogFragment {
         mActivity=new WeakReference<>((ChatRoomActivity) context);
     }
 
-    @SuppressLint("CommitTransaction")
-    @Override
-    public void show(FragmentManager manager, String tag) {
-        Log.i(TAG, "show: 1");
-        if (!isExist) {
-            Log.i(TAG, "show: 2");
-            super.show(manager, tag);
-            isExist = !isExist;
-            Log.i(TAG, "show: "+isExist);
-        }
-    }
-
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        Log.i(TAG, "onDismiss: 1 "+isExist);
-        if (isExist) {
-            Log.i(TAG, "onDismiss: 2");
-            super.dismiss();
-        }
-    }
 
     @Override
     public int setResLayoutId() {  return R.layout.fragment_wait_pairing;  }
@@ -117,7 +92,6 @@ public class WaitPairingFragment extends BaseDialogFragment {
     public void onDestroyView() {
         mBack=null;
         metrics=null;
-        isExist=false;
         super.onDestroyView();
     }
 }

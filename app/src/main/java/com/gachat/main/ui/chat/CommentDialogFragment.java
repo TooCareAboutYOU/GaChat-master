@@ -2,9 +2,6 @@ package com.gachat.main.ui.chat;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -31,25 +28,6 @@ public class CommentDialogFragment extends BaseDialogFragment {
              instance = new CommentDialogFragment();
          }
      return instance;
-    }
-
-    @SuppressLint("CommitTransaction")
-    @Override
-    public void show(FragmentManager manager, String tag) {
-        Log.i("DialogFragment", "show: ");
-//        if (mActivity != null && (getDialog() != null || !getDialog().isShowing())) {
-            FragmentTransaction transaction=manager.beginTransaction();
-            transaction.add(this,tag);
-            transaction.commitNowAllowingStateLoss();
-            transaction.show(this);
-//        }else {
-//            super.show(manager, tag);
-//        }
-    }
-
-    @Override
-    public void dismissAllowingStateLoss() {
-        super.dismissAllowingStateLoss();
     }
 
     @Override
